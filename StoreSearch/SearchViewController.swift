@@ -11,56 +11,94 @@ import UIKit
 class SearchViewController: UIViewController {
 
   //MARK:- properties
-  var searchResults = [String]()
+  var searchResults = [SearchResult]()
+  var hasSearched = false
   
   //MARK:- Outlets
   @IBOutlet weak var searchBar: UISearchBar!
   @IBOutlet weak var tableView: UITableView!
-  
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
     tableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
   }
-
-
   
 }
-
 
 extension SearchViewController: UISearchBarDelegate {
   
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    searchBar.resignFirstResponder()
     searchResults = []
-    for i in 0...2 {
-      searchResults.append(String(format:
-      "Fake Result %d for '%@'", i, searchBar.text!))
+    
+    if searchBar.text! != "justin bieber" {
+      for i in 0...2 {
+        let searchResult = SearchResult()
+        searchResult.name = String(format: "Fake Result %d for", i)
+        searchResult.artistName = searchBar.text!
+        searchResults.append(searchResult)
+      }
     }
+    hasSearched = true
     tableView.reloadData()
   }
-  
 }
-
 
 extension SearchViewController: UITableViewDelegate,
 UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return searchResults.count
+    
+    if !hasSearched {
+      return 0
+    } else if searchResults.count == 0 {
+      return 1
+    } else {
+        return searchResults.count
+    }
+  
   }
   
+  //  tableView cellForRowAt
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cellIdentifier = "SearchResultCell"
     
-    var cell:UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)
+    var cell: UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)
     
     if cell == nil {  // if cell wasn't been reused
-      cell = UITableViewCell(style: .default, reuseIdentifier: cellIdentifier)
+      cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellIdentifier)
     }
-    cell.textLabel!.text = searchResults[indexPath.row]
+    
+    if searchResults.count == 0 {
+      cell.textLabel!.text = "(Nothing found)"
+      cell.detailTextLabel!.text = ""
+    } else {
+    let searchResult = searchResults[indexPath.row]
+    cell.textLabel!.text = searchResult.name
+    cell.detailTextLabel!.text = searchResult.artistName
+  }
     return cell
   }
   
+  
+  // position for bar
+  func position(for bar: UIBarPositioning) -> UIBarPosition {
+    return .topAttached
+  }
+  
+  // tableView willSelectRowAt
+  func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+    if searchResults.count == 0 {
+      return nil
+    } else {
+      return indexPath
+    }
+  }
+  
+  // tableView didSelectRowAt
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: true)
+  }
   
 }
