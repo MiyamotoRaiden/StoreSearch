@@ -11,33 +11,50 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchResultCell" id="GhI-9w-QDA">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchResultCell" id="GhI-9w-QDA" customClass="SearchResultCell" customModule="StoreSearch" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="GhI-9w-QDA" id="ZIJ-PC-yoZ">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="usq-Tj-gxO">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="usq-Tj-gxO">
                         <rect key="frame" x="16" y="10" width="60" height="60"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="60" id="iP5-ER-t73"/>
+                            <constraint firstAttribute="width" constant="60" id="yom-p5-zZ5"/>
+                        </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1NY-Nm-rsS">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1NY-Nm-rsS">
                         <rect key="frame" x="84" y="16" width="220" height="22"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Artist Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWu-gh-M21">
-                        <rect key="frame" x="84" y="44" width="220" height="18"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IWu-gh-M21">
+                        <rect key="frame" x="84" y="45.5" width="220" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="IWu-gh-M21" secondAttribute="trailing" constant="16" id="JoV-Tr-3CD"/>
+                    <constraint firstItem="1NY-Nm-rsS" firstAttribute="top" secondItem="ZIJ-PC-yoZ" secondAttribute="top" constant="16" id="Msv-Rb-YQD"/>
+                    <constraint firstAttribute="trailing" secondItem="1NY-Nm-rsS" secondAttribute="trailing" constant="16" id="S1p-HG-nW0"/>
+                    <constraint firstAttribute="bottom" secondItem="IWu-gh-M21" secondAttribute="bottom" constant="16" id="VaP-fK-gfo"/>
+                    <constraint firstItem="usq-Tj-gxO" firstAttribute="top" secondItem="ZIJ-PC-yoZ" secondAttribute="top" constant="10" id="WTW-Md-Xfr"/>
+                    <constraint firstItem="1NY-Nm-rsS" firstAttribute="leading" secondItem="usq-Tj-gxO" secondAttribute="trailing" constant="8" id="XYP-pk-1cB"/>
+                    <constraint firstItem="IWu-gh-M21" firstAttribute="leading" secondItem="usq-Tj-gxO" secondAttribute="trailing" constant="8" id="eKp-w7-fOJ"/>
+                    <constraint firstItem="IWu-gh-M21" firstAttribute="top" secondItem="1NY-Nm-rsS" secondAttribute="bottom" constant="7.5" id="pRY-yg-7le"/>
+                    <constraint firstItem="usq-Tj-gxO" firstAttribute="leading" secondItem="ZIJ-PC-yoZ" secondAttribute="leading" constant="16" id="uJH-h1-1iW"/>
+                </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="artistNameLabel" destination="IWu-gh-M21" id="Mbg-CT-Qtg"/>
+                <outlet property="artworkImageView" destination="usq-Tj-gxO" id="RqV-PX-Wu9"/>
+                <outlet property="nameLabel" destination="1NY-Nm-rsS" id="M4j-3m-KTj"/>
+            </connections>
             <point key="canvasLocation" x="-30" y="7.394366197183099"/>
         </tableViewCell>
     </objects>
