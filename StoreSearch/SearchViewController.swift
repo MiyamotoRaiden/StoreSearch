@@ -38,6 +38,8 @@ class SearchViewController: UIViewController {
     
     cellNib = UINib(nibName: TableView.CellIdentifiers.nothingFoundCell, bundle: nil)
     tableView.register(cellNib, forCellReuseIdentifier: TableView.CellIdentifiers.nothingFoundCell)
+    
+    searchBar.becomeFirstResponder()
   }
   
 }
@@ -80,9 +82,11 @@ UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     if searchResults.count == 0 {
-      return tableView.dequeueReusableCell(withIdentifier: TableView.CellIdentifiers.nothingFoundCell, for: indexPath)
+      return tableView.dequeueReusableCell(withIdentifier:
+        TableView.CellIdentifiers.nothingFoundCell, for: indexPath)
     } else {
-      let cell = tableView.dequeueReusableCell(withIdentifier: TableView.CellIdentifiers.searchResultCell, for: indexPath) as! SearchResultCell
+      let cell = tableView.dequeueReusableCell(withIdentifier:
+        TableView.CellIdentifiers.searchResultCell, for: indexPath) as! SearchResultCell
       
       let searchResult = searchResults[indexPath.row]
       cell.nameLabel.text = searchResult.name

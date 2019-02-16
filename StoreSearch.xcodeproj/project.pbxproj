@@ -65,11 +65,10 @@
 				05F927E52211848C002CF8F8 /* AppDelegate.swift */,
 				05F927E72211848C002CF8F8 /* SearchViewController.swift */,
 				05FD4CBA221319CE00D0740F /* SearchResult.swift */,
-				05F927E92211848C002CF8F8 /* Main.storyboard */,
-				05F927EC2211848E002CF8F8 /* Assets.xcassets */,
+				05FD4CC52218184400D0740F /* Data */,
 				05F927EE2211848E002CF8F8 /* LaunchScreen.storyboard */,
 				05F927F12211848E002CF8F8 /* Info.plist */,
-				05FD4CBE22133F5100D0740F /* xib */,
+				05FD4CC6221823AF00D0740F /* Interface */,
 			);
 			path = StoreSearch;
 			sourceTree = "<group>";
@@ -98,6 +97,23 @@
 				05FD4CC32215958300D0740F /* NothingFoundCell.xib */,
 			);
 			path = NothingFoundCell;
+			sourceTree = "<group>";
+		};
+		05FD4CC52218184400D0740F /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				05F927EC2211848E002CF8F8 /* Assets.xcassets */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		05FD4CC6221823AF00D0740F /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				05F927E92211848C002CF8F8 /* Main.storyboard */,
+				05FD4CBE22133F5100D0740F /* xib */,
+			);
+			path = Interface;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
