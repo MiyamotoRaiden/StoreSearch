@@ -43,6 +43,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05687833221B0B8B00583CBF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				05FD4CBA221319CE00D0740F /* SearchResult.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		05F927D92211848B002CF8F8 = {
 			isa = PBXGroup;
 			children = (
@@ -64,7 +72,7 @@
 			children = (
 				05F927E52211848C002CF8F8 /* AppDelegate.swift */,
 				05F927E72211848C002CF8F8 /* SearchViewController.swift */,
-				05FD4CBA221319CE00D0740F /* SearchResult.swift */,
+				05687833221B0B8B00583CBF /* Model */,
 				05FD4CC52218184400D0740F /* Data */,
 				05F927EE2211848E002CF8F8 /* LaunchScreen.storyboard */,
 				05F927F12211848E002CF8F8 /* Info.plist */,
@@ -73,13 +81,13 @@
 			path = StoreSearch;
 			sourceTree = "<group>";
 		};
-		05FD4CBE22133F5100D0740F /* xib */ = {
+		05FD4CBE22133F5100D0740F /* xib and swift */ = {
 			isa = PBXGroup;
 			children = (
 				05FD4CC22215942900D0740F /* NothingFoundCell */,
 				05FD4CC12215940600D0740F /* SearchResultCell */,
 			);
-			path = xib;
+			path = "xib and swift";
 			sourceTree = "<group>";
 		};
 		05FD4CC12215940600D0740F /* SearchResultCell */ = {
@@ -111,7 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				05F927E92211848C002CF8F8 /* Main.storyboard */,
-				05FD4CBE22133F5100D0740F /* xib */,
+				05FD4CBE22133F5100D0740F /* xib and swift */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
