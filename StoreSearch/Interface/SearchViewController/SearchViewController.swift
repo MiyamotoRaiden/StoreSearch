@@ -45,9 +45,17 @@ class SearchViewController: UIViewController {
   
   
   
-
+  //MARK:-  Networking error alert
   
-  
+  func showNetworkingError() {
+    let alert = UIAlertController(title: "Whoops...",
+                                     message: "There was an error accessing the iTunes Store." +
+                                              " Please try again",
+                              preferredStyle: .alert)
+    let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+    alert.addAction(action)
+    present(alert, animated: true, completion: nil)
+  }
   
   
 }
@@ -68,6 +76,7 @@ extension SearchViewController: UISearchBarDelegate {
       return try Data(contentsOf: url)
     } catch {
       print("Download Error: \"(error.localizedDescription)")
+      showNetworkingError()
       return nil
     }
   }
@@ -99,13 +108,11 @@ extension SearchViewController: UISearchBarDelegate {
      let url = iTunesURL(searchText: searchBar.text!)
      print("URL: '\(url)'")
       if let data = performStoreRequest(with: url) {
-        let results = parse(data: data)
-        print("Got results: \(results)")
+        searchResults = parse(data: data)
       }
       tableView.reloadData()
     }
   }
-  
   
   
 }
@@ -113,7 +120,8 @@ extension SearchViewController: UISearchBarDelegate {
 extension SearchViewController: UITableViewDelegate,
 UITableViewDataSource {
   
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  func tableView(_ tableView: UITableView,
+                 numberOfRowsInSection section: Int) -> Int {
     
     if !hasSearched {
       return 0
@@ -126,8 +134,8 @@ UITableViewDataSource {
   }
   
   //  tableView cellForRowAt
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
+  func tableView(_ tableView: UITableView,
+       cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if searchResults.count == 0 {
       return tableView.dequeueReusableCell(withIdentifier:
         TableView.CellIdentifiers.nothingFoundCell, for: indexPath)
