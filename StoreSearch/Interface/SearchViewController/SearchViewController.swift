@@ -31,32 +31,28 @@ class SearchViewController: UIViewController {
     
     tableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
     
-    var cellNib = UINib(nibName:
-      TableView.CellIdentifiers.searchResultCell, bundle: nil)
-    tableView.register(cellNib,
-                forCellReuseIdentifier:TableView.CellIdentifiers.searchResultCell)
+    var cellNib = UINib(nibName: TableView.CellIdentifiers.searchResultCell,
+                        bundle: nil)
+    
+    tableView.register(cellNib, forCellReuseIdentifier:TableView.CellIdentifiers.searchResultCell)
     
     cellNib = UINib(nibName: TableView.CellIdentifiers.nothingFoundCell, bundle: nil)
-    tableView.register(cellNib, forCellReuseIdentifier: TableView.CellIdentifiers.nothingFoundCell)
+    tableView.register(cellNib,
+        forCellReuseIdentifier: TableView.CellIdentifiers.nothingFoundCell)
     
     searchBar.becomeFirstResponder()
   }
-  
-  
-  
-  
+
   //MARK:-  Networking error alert
-  
   func showNetworkingError() {
     let alert = UIAlertController(title: "Whoops...",
-                                     message: "There was an error accessing the iTunes Store." +
-                                              " Please try again",
-                              preferredStyle: .alert)
+      message: "There was an error accessing the iTunes Store."
+               + " Please try again", preferredStyle: .alert)
+    
     let action = UIAlertAction(title: "OK", style: .default, handler: nil)
     alert.addAction(action)
     present(alert, animated: true, completion: nil)
   }
-  
   
 }
 
@@ -112,6 +108,7 @@ extension SearchViewController: UISearchBarDelegate {
       }
       tableView.reloadData()
     }
+    
   }
   
   

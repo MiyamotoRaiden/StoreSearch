@@ -66,6 +66,7 @@
 		05687835221C28E300583CBF /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				05F927E92211848C002CF8F8 /* Main.storyboard */,
 				05687834221C27BF00583CBF /* SearchViewController */,
 			);
 			path = Interface;
@@ -90,7 +91,6 @@
 		05F927E42211848B002CF8F8 /* StoreSearch */ = {
 			isa = PBXGroup;
 			children = (
-				05F927E92211848C002CF8F8 /* Main.storyboard */,
 				05687835221C28E300583CBF /* Interface */,
 				05687833221B0B8B00583CBF /* Model */,
 				05FD4CC52218184400D0740F /* Data */,
