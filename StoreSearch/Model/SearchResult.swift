@@ -103,3 +103,8 @@ class SearchResult: Codable, CustomStringConvertible {
   
   
 }
+
+func < ( lhs: SearchResult, rhs: SearchResult) -> Bool {
+  return lhs.name.localizedStandardCompare(rhs.name) ==
+  .orderedAscending
+}
