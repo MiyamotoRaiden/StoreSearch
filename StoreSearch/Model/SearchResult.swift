@@ -20,13 +20,10 @@ class SearchResult: Codable, CustomStringConvertible {
   var imageSmall = ""
   var imageLarge = ""
   
-  // requare property to conform to CustomStringConvertible
-  var description: String {
-    return "Kind: \(kind ?? "None"), Name: \(name), Artist Name: \(artistName ?? "None")"
-  }
+  // kind
+  var kind: String? = ""
   
-  // kind computed property
-  var type: String {
+  var type: String { // return more human readeble kind
     let kind = self.kind ?? "audiobook"
     switch kind {
     case "album": return "Album"
@@ -43,37 +40,50 @@ class SearchResult: Codable, CustomStringConvertible {
     }
     return "Unknown"
   }
-  var kind: String? = ""
   
-  // artist computed property
+  
+  // artist
+  var artistName: String? = ""
+  
   var artist: String {
     return artistName ?? ""
   }
-  var artistName: String? = ""
+
   
-  // name computed property
-  var name: String {
-    return trackName ?? collectionName ?? ""
-  }
+  // name
+  
   var trackName: String? = ""
   var collectionName: String?
   
-  //// URL computed property
-  var storeURL: String {
-    return trackViewUrl ?? collectionViewUrl ?? ""
+  var name: String {
+    return trackName ?? collectionName ?? ""
   }
+
+  
+  //// URL
   var trackViewUrl: String?
   var collectionViewUrl: String?
   
-   //// price computed property
-  var price: Double {
-    return trackPrice ?? collectionPrice ?? itemPrice ?? 0.0
+  var storeURL: String {
+    return trackViewUrl ?? collectionViewUrl ?? ""
   }
+  
+  
+   //// price
   var trackPrice: Double? = 0.0
   var collectionPrice: Double?
   var itemPrice: Double?
   
-  //////// genre computed property
+  var price: Double {
+    return trackPrice ?? collectionPrice ?? itemPrice ?? 0.0
+  }
+ 
+  
+  
+  
+  //////// genre
+  var itemGenre: String?
+  var bookGenre: [String]?
   
   var genre: String {
     if let genre = itemGenre {
@@ -83,11 +93,14 @@ class SearchResult: Codable, CustomStringConvertible {
     }
     return ""
   }
-  
-  var itemGenre: String?
-  var bookGenre: [String]?
   /////////////////////////////////////////
- 
+  
+  // requare property to conform to CustomStringConvertible
+  var description: String {
+    return "Kind: \(kind ?? "None"), Name: \(name), Artist Name: \(artistName ?? "None")"
+  }
+  ////////////////////////////////
+  
   enum CodingKeys: String, CodingKey {
     case imageSmall = "artworkUrl60"
     case imageLarge = "artworkUrl100"
@@ -98,9 +111,6 @@ class SearchResult: Codable, CustomStringConvertible {
     case trackName, trackPrice, trackViewUrl
     case collectionName, collectionViewUrl, collectionPrice
   }
-  
-
-  
   
 }
 

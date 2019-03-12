@@ -17,7 +17,6 @@ class SearchViewController: UIViewController {
   var hasSearched = false
   var isLoading = false
   
-  
   //MARK:- Outlets
   @IBOutlet weak var searchBar: UISearchBar!
   @IBOutlet weak var tableView: UITableView!
@@ -28,7 +27,7 @@ class SearchViewController: UIViewController {
     performSearch()
   }
   
- //MARK:- Structs with reuse identifiers
+ //MARK:- TableView.CellIdentifiers
   struct TableView {
     struct CellIdentifiers {
       static let searchResultCell = "SearchResultCell"
@@ -37,6 +36,7 @@ class SearchViewController: UIViewController {
     }
   }
   
+  //MARK:- viewDidLoad
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -44,14 +44,16 @@ class SearchViewController: UIViewController {
     
     var cellNib =
       UINib(nibName: TableView.CellIdentifiers.searchResultCell, bundle: nil)
-    tableView.register(cellNib, forCellReuseIdentifier:TableView.CellIdentifiers.searchResultCell)
+    tableView.register(cellNib,
+                       forCellReuseIdentifier:TableView.CellIdentifiers.searchResultCell)
     
     cellNib = UINib(nibName: TableView.CellIdentifiers.nothingFoundCell, bundle: nil)
     tableView.register(cellNib,
         forCellReuseIdentifier: TableView.CellIdentifiers.nothingFoundCell)
     
     cellNib = UINib(nibName: TableView.CellIdentifiers.loadingCell, bundle: nil)
-    tableView.register(cellNib, forCellReuseIdentifier: TableView.CellIdentifiers.loadingCell)
+    tableView.register(cellNib,
+                       forCellReuseIdentifier: TableView.CellIdentifiers.loadingCell)
     
     searchBar.becomeFirstResponder()
   }
@@ -71,7 +73,6 @@ class SearchViewController: UIViewController {
   func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
     performSearch()
   }
-
 }
 
 extension SearchViewController: UISearchBarDelegate {
@@ -96,9 +97,7 @@ extension SearchViewController: UISearchBarDelegate {
     let url = URL(string: urlString)
     return url!
   }
-  
 
-  
   func parse(data: Data) -> [SearchResult] {
     do {
       let decoder = JSONDecoder()
@@ -109,10 +108,7 @@ extension SearchViewController: UISearchBarDelegate {
       return []
     }
   }
-  
   ////////////////////////////////////////////////
-  
-  
   
   func performSearch() {
     
@@ -124,7 +120,6 @@ extension SearchViewController: UISearchBarDelegate {
       
       hasSearched = true
       searchResults = []
-      
       
       let url = iTunesURL(searchText: searchBar.text!,
                           category: segmentedControl.selectedSegmentIndex)
@@ -159,6 +154,12 @@ extension SearchViewController: UISearchBarDelegate {
       dataTask?.resume()
     }
   }
+  
+  // position for bar
+  func position(for bar: UIBarPositioning) -> UIBarPosition {
+    return .topAttached
+  }
+  
 }
 
 extension SearchViewController: UITableViewDelegate,
@@ -184,34 +185,28 @@ UITableViewDataSource {
        cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     if isLoading {
-      let cell = tableView.dequeueReusableCell(withIdentifier: TableView.CellIdentifiers.loadingCell, for: indexPath)
+      
+      let cell = tableView.dequeueReusableCell(
+        
+        withIdentifier: TableView.CellIdentifiers.loadingCell, for: indexPath)
       let spinner = cell.viewWithTag(100) as! UIActivityIndicatorView
       spinner.startAnimating()
       return cell
+      
     } else if searchResults.count == 0 {
       return tableView.dequeueReusableCell(withIdentifier:
         TableView.CellIdentifiers.nothingFoundCell, for: indexPath)
+      
     } else {
       let cell = tableView.dequeueReusableCell(withIdentifier:
         TableView.CellIdentifiers.searchResultCell, for: indexPath) as! SearchResultCell
       
       let searchResult = searchResults[indexPath.row]
-      cell.nameLabel.text = searchResult.name
-      
-      if searchResult.artist.isEmpty {
-        cell.artistNameLabel.text = "Unknown"
-      } else {
-        cell.artistNameLabel.text = String(format: "%@ (%@)", searchResult.artist, searchResult.type)
-      }
+      cell.configure(for: searchResult)
       return cell
     }
   }
   
-  
-  // position for bar
-  func position(for bar: UIBarPositioning) -> UIBarPosition {
-    return .topAttached
-  }
   
   // tableView willSelectRowAt
   func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
@@ -226,10 +221,5 @@ UITableViewDataSource {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
   }
-  
-  
-  
-  
-  
   
 }
