@@ -108,7 +108,7 @@ extension SearchViewController: UISearchBarDelegate {
       return []
     }
   }
-  ////////////////////////////////////////////////
+  /////////////////////////////////////////////
   
   func performSearch() {
     
@@ -220,6 +220,7 @@ UITableViewDataSource {
   // tableView didSelectRowAt
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
+    performSegue(withIdentifier: "ShowDetail", sender: indexPath)
   }
   
 }
